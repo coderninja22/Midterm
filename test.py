@@ -1,5 +1,5 @@
 # content of test_sample.py
-print "Hello World"
+print("Hello World")
 
 #def inc(x):
 #    return x + 1
