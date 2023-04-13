@@ -7,3 +7,7 @@ print("Jenkins Test")
 
 #def test_answer():
 #    assert inc(3) == 5
+
+
+import subprocess
+subprocess.call(r'test.bat')
