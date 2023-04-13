@@ -10,6 +10,7 @@ pipeline{
                 curl --version
                 jq --version
                 '''
+                
             }
         }
     }
