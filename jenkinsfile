@@ -5,7 +5,6 @@ pipeline{
             steps{
                 bat '''
                 docker build -t composetest .
-                docker compose up
                 '''
             }
         }
