@@ -4,7 +4,7 @@ pipeline{
         stage("Verify tooling"){
             steps{
                 bat '''
-                docker build -t composetest .
+                docker compose up
                 '''
             }
         }
