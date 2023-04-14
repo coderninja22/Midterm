@@ -1,0 +1,31 @@
+<html>
+ <body>
+   <p>Input first number:</p>
+   <input type='text' class='first_val'>
+   <p>Input second number:</p>
+   <input type='text' class='second_val'>
+   <div class='results'></div>
+   <button type='button' class='calculate'>Calculate</button>
+ </body>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"> 
+</script>
+ <script>
+   $(document).ready(function() {
+     $('.calculate').click(function() {
+       var val1 = $('.first_val').val();
+       var val2 = $('.second_val').val();
+       $.ajax({
+        url: "/get_numbers",
+        type: "get",
+        data: {val1: val1, val2:val2},
+        success: function(response) {
+            $(".results").html(response.packet);
+         },
+          error: function(xhr) {
+          //Do Something to handle error
+         }
+        });
+     });
+   });
+ </script>
+</html>
