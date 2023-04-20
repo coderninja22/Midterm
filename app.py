@@ -1,45 +1,21 @@
-import time
-
-import redis
-from flask import Flask
+import codecs
+from flask import Flask, redirect, url_for, request
+from redis import Redis
 
 app = Flask(__name__)
-cache = redis.Redis(host='redis', port=6379)
+redis = Redis(host='redis', port=6379)
 
-def get_hit_count():
-    retries = 5
-    while True:
-        try:
-            return cache.incr('hits')
-        except redis.exceptions.ConnectionError as exc:
-            if retries == 0:
-                raise exc
-            retries -= 1
-            time.sleep(0.5)
-
-@app.route('/')
+@app.route('/', methods = ['POST','GET'])
 def hello():
-    count = get_hit_count()
-    return "Test"
-    
-@app.route('/test')
-def test():
-    value1 = Flask.request.args.get('val1')
-    value2 = Flask.request.args.get('val2')
-    return "Test Results:" + value1 + value2
+    return open("index.html", 'r')
 
-    
-'''
-@app.route('/', methods=['GET', 'POST'])
-def home():
-   return Flask.render_template('index.html')
-
-@app.route('/get_numbers')
-def get_values():
-   value1 = Flask.request.args.get('val1')
-   value2 = Flask.request.args.get('val2')
-   return Flask.jsonify({'data':f'<p>The result is: {value1+value2}</p>'})
+@app.route('/calculate', methods = ['POST','GET'])
+def calculate():
+    val1 = request.args.get('val1')
+    val2 = request.args.get('val2')
+    sum = int(val1) + int(val2)
+    return str(sum)
 
 
-
-'''
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
