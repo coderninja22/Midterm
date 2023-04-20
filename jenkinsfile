@@ -3,9 +3,7 @@ pipeline{
     stages{
         stage("Verify tooling"){
             steps{
-                bat '''
-                docker compose up
-                '''
+                bat encoding: 'utf-8', returnStdout: true, script: 'docker compose up'
             }
         }
     }
