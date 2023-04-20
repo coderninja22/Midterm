@@ -1,9 +1,12 @@
 pipeline{
     agent any
     stages{
-        stage("Verify tooling"){
+        stage("Building"){
+            bat "docker build -t nodeapp ."
+        }
+        stage("Compose up"){
             steps{
-                bat encoding: 'utf-8', returnStdout: true, script: 'docker compose up'
+                bat "docker nodeapp run"
             }
         }
     }
