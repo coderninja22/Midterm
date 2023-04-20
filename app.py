@@ -1,4 +1,3 @@
-import codecs
 from flask import Flask, redirect, url_for, request
 from redis import Redis
 
