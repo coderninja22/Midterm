@@ -1,12 +1,18 @@
 pipeline{
     agent any
     stages{
-        stage("Building"){
-            bat "docker build -t nodeapp ."
-        }
-        stage("Compose up"){
+        stage("docker build"){
             steps{
-                bat "docker nodeapp run"
+                bat '''
+                docker build -t nodeapp .
+                '''
+            }
+        }
+        stage("running"){
+            steps{
+                bat '''
+                docker compose up
+                '''
             }
         }
     }
